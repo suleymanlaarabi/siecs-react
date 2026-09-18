@@ -61,7 +61,8 @@ export function updateRendererRoot(
   root: RendererRoot,
   node: ReactNode,
 ): void {
-  reconciler.updateContainer(node, root, null, null);
+  reconciler.updateContainerSync(node, root, null, null);
+  reconciler.flushSyncWork();
 }
 
 export function unmountRendererRoot(root: RendererRoot): void {

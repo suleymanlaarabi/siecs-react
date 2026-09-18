@@ -12,6 +12,7 @@ export interface EntityRef {
 }
 
 export interface Root {
+  /** Commits the React tree and its ECS mutations before returning. */
   render(node: ReactNode): void;
   unmount(): void;
 }

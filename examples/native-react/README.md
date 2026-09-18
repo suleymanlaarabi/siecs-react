@@ -26,7 +26,10 @@ native library, and the compiled shaders in sync.
 The TypeScript paths point to the current `siecs-react` source while sharing
 its single `siecs-ts` runtime with the renderer.
 
+The application imports both JSX components and ECS operations from
+`siecs-react`; each component keeps the same name in the scene and systems.
+
 Press `Q` to quit from the scene (the native renderer also accepts `Escape` or
-the window close action). `run()` closes the native SIECS runtime when the
-window exits, so the example only calls `root.unmount()` if startup fails
-before `run()` begins.
+the window close action). `root.render()` commits the ECS scene before it
+returns, so the application can enter `run()` directly without refs, timers,
+or teardown orchestration.
