@@ -1,0 +1,51 @@
+{
+  "name": "siecs-react",
+  "version": "0.1.0",
+  "description": "React renderer for SIECS",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build:siecs": "bun --cwd ../siecs-ts run build",
+    "dev:fresh": "bun run build:siecs && vite --force",
+    "build:js": "vite build",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build": "bun run build:js && bun run build:types",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "bench": "vitest bench --run",
+    "check": "bun run typecheck && bun run test && bun run build"
+  },
+  "peerDependencies": {
+    "react": "^19.3.0",
+    "siecs-ts": ">=0.1.0 <0.2.0"
+  },
+  "dependencies": {
+    "react-reconciler": "0.34.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-reconciler": "0.33.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "react": "19.3.0",
+    "siecs-ts": "file:../siecs-ts",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
+  }
+}
