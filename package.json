@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build:siecs": "bun --cwd ../siecs-ts run build",
+    "build:siecs": "bun run --cwd ../siecs-ts build",
     "dev:fresh": "bun run build:siecs && vite --force",
     "build:js": "vite build",
     "build:types": "tsc -p tsconfig.build.json",
@@ -29,6 +29,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "bench": "vitest bench --run",
+    "example:native-react": "bun run build:siecs && bun run --cwd examples/native-react start",
     "check": "bun run typecheck && bun run test && bun run build"
   },
   "peerDependencies": {

@@ -42,3 +42,6 @@ player.current?.isAlive();
 
 Suspense/Offscreen visibility maps to the SIECS `Disabled` component. Text
 nodes are intentionally unsupported.
+
+For a complete SDL3/Vulkan scene driven by React JSX (with no browser or
+Vite), see [`examples/native-react`](./examples/native-react/README.md).
