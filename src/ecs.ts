@@ -376,6 +376,19 @@ export const Shadows = siecs.Shadows;
 export const Multisampling = siecs.Multisampling;
 export const BloomSettings = siecs.BloomSettings;
 export const Keyboard = siecs.Keyboard;
+export const Pointer = siecs.Pointer;
+export const PointerEvents = siecs.PointerEvents;
+export const PointerEventMask = siecs.PointerEventMask;
+export const PointerEnter = siecs.PointerEnter;
+export const PointerLeave = siecs.PointerLeave;
+export const PointerMove = siecs.PointerMove;
+export const PointerDown = siecs.PointerDown;
+export const PointerUp = siecs.PointerUp;
+export const PointerCancel = siecs.PointerCancel;
+export const Click = siecs.Click;
+export const Press = siecs.Press;
+export const Wheel = siecs.Wheel;
+export const setPointerEvents = siecs.setPointerEvents;
 export const Key = siecs.Key;
 export const OnAdd = siecs.OnAdd;
 export const OnRemove = siecs.OnRemove;
@@ -403,6 +416,8 @@ export type {
   FixedArray,
   Phase,
   PhaseOptions,
+  PointerEventData,
+  PointerType,
   Relation,
   RelationEvent,
   Resource,

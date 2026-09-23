@@ -31,6 +31,7 @@ export interface EntityInstance extends EntityRef {
   children: HostInstance[];
   props: EntityHostProps;
   hidden: boolean;
+  pointerMask: number;
 }
 
 export interface ComponentInstance {

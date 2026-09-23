@@ -47,11 +47,11 @@ test("rejects text nodes with a clear renderer error", () => {
 });
 
 test("builds an inert host tree before mount", () => {
-  const Marker = component("ReactInertMarker");
+  const Marker = component("ReactInertMarker", { value: "u8" });
   const entity = hostConfig.createInstance(ENTITY_TYPE, {});
   const marker = hostConfig.createInstance(COMPONENT_TYPE, {
     component: Marker,
-    value: {},
+    value: { value: 1 },
   });
 
   hostConfig.appendInitialChild(entity, marker);

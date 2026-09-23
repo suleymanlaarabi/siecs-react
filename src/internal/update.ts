@@ -1,10 +1,23 @@
-import { add, Disabled, Name, remove, set, setName } from "siecs-ts";
+import {
+  add,
+  Disabled,
+  Name,
+  remove,
+  set,
+  setName,
+  setPointerEvents,
+} from "siecs-ts";
 import type {
   ComponentInstance,
   EntityHostProps,
   EntityInstance,
   HostInstance,
 } from "./host-types.js";
+import { pointerMask } from "./events/mask.js";
+import {
+  registerInteractiveInstance,
+  unregisterInteractiveInstance,
+} from "./events/registry.js";
 
 export function shallowEqual(left: unknown, right: unknown): boolean {
   if (Object.is(left, right)) return true;
@@ -43,6 +56,15 @@ export function updateEntity(
   const previousProps = node.props;
   node.props = nextProps;
   if (!node.mounted) return;
+
+  const oldPointerMask = node.pointerMask;
+  const nextPointerMask = pointerMask(nextProps);
+  if (oldPointerMask !== nextPointerMask) {
+    setPointerEvents(node.id, nextPointerMask);
+    if (oldPointerMask === 0) registerInteractiveInstance(node);
+    else if (nextPointerMask === 0) unregisterInteractiveInstance(node);
+    node.pointerMask = nextPointerMask;
+  }
 
   if (previousProps.name !== nextProps.name) {
     if (nextProps.name === undefined) remove(node.id, Name);

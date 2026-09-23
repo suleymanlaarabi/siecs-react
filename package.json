@@ -27,9 +27,9 @@
     "build:types": "tsc -p tsconfig.build.json",
     "build": "bun run build:js && bun run build:types",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "bun test",
     "bench": "vitest bench --run",
-    "example:native-react": "bun run build:siecs && bun run --cwd examples/native-react start",
+    "example:native-react": "bun run build:siecs && bun run build && bun run --cwd examples/native-react start",
     "check": "bun run typecheck && bun run test && bun run build"
   },
   "peerDependencies": {

@@ -8,12 +8,18 @@ import {
   relate,
   set,
   setName,
+  setPointerEvents,
 } from "siecs-ts";
 import type {
   ComponentInstance,
   EntityInstance,
   HostInstance,
 } from "./host-types.js";
+import { pointerMask } from "./events/mask.js";
+import {
+  registerInteractiveInstance,
+  unregisterInteractiveInstance,
+} from "./events/registry.js";
 
 function mountComponent(
   node: ComponentInstance,
@@ -55,6 +61,12 @@ export function mountEntity(
       add(current.node.id, Disabled);
     }
 
+    current.node.pointerMask = pointerMask(current.node.props);
+    if (current.node.pointerMask !== 0) {
+      setPointerEvents(current.node.id, current.node.pointerMask);
+      registerInteractiveInstance(current.node);
+    }
+
     for (let index = current.node.children.length - 1; index >= 0; index--) {
       const child = current.node.children[index]!;
       pending.push({ node: child, parent: current.node });
@@ -79,6 +91,10 @@ export function markSubtreeUnmounted(node: HostInstance): void {
     current.parent = null;
     if (current.kind === "component") continue;
 
+    if (current.pointerMask !== 0) {
+      unregisterInteractiveInstance(current);
+      current.pointerMask = 0;
+    }
     current.id = 0n;
     pending.push(...current.children);
   }

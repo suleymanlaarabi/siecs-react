@@ -2,6 +2,7 @@ import { act, createRef, type ReactNode, Suspense } from "react";
 import { component, Disabled, has, query } from "siecs-ts";
 import { expect, test } from "vitest";
 import { bind, createRoot, Entity, type EntityRef } from "../src/index.js";
+import { findInteractiveInstance } from "../src/internal/events/registry.js";
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -46,7 +47,7 @@ test("Suspense visibility maps to Disabled without replacing the entity", async 
   const tree = () => (
     <Suspense fallback={null}>
       <Gate>
-        <Entity ref={reference} />
+        <Entity ref={reference} onClick={() => {}} />
       </Gate>
     </Suspense>
   );
@@ -56,16 +57,19 @@ test("Suspense visibility maps to Disabled without replacing the entity", async 
   const handle = reference.current!;
   const id = handle.id;
   expect(has(id, Disabled)).toBe(false);
+  expect(findInteractiveInstance(id)?.id).toBe(id);
 
   hidden = true;
   await act(async () => root.render(tree()));
   expect(reference.current).toBeNull();
   expect(handle.id).toBe(id);
   expect(has(id, Disabled)).toBe(true);
+  expect(findInteractiveInstance(id)?.id).toBe(id);
 
   hidden = false;
   await act(async () => root.render(tree()));
   expect(reference.current!.id).toBe(id);
   expect(has(id, Disabled)).toBe(false);
+  expect(findInteractiveInstance(id)?.id).toBe(id);
   root.unmount();
 });

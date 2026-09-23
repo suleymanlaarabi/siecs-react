@@ -20,6 +20,7 @@ export function createEntityInstance(props: EntityHostProps): EntityInstance {
     children: [],
     props,
     hidden: false,
+    pointerMask: 0,
     isAlive() {
       return this.mounted && isAlive(this.id);
     },

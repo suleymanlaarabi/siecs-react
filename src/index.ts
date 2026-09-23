@@ -5,6 +5,7 @@ export {
   Camera,
   Color,
   Cuboid,
+  Cylinder,
   Disabled,
   GlobalOrientation3d,
   GlobalPosition2d,
@@ -19,6 +20,7 @@ export {
   Rotation3d,
   Scale2d,
   Scale3d,
+  Sphere,
   Static,
   type AnyBoundComponent,
   type BoundComponent,
@@ -30,4 +32,12 @@ export {
 export { Entity } from "./Entity.js";
 export { createRoot } from "./root.js";
 export * from "./ecs.js";
-export type { EntityProps, EntityRef, Root } from "./types.js";
+export type {
+  EntityProps,
+  EntityRef,
+  PointerEventHandler,
+  PointerEventHandlers,
+  Root,
+  SiecsPointerEvent,
+  SiecsPointerEventType,
+} from "./types.js";

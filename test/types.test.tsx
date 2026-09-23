@@ -3,6 +3,8 @@ import { expect, test } from "vitest";
 import {
   bind,
   component as reactComponent,
+  Cuboid,
+  Entity,
   entity,
   query,
   system,
@@ -26,7 +28,21 @@ function typeContracts() {
   });
   // @ts-expect-error x must be a number
   const invalid = <RPosition x="bad" y={2} />;
-  return [valid, invalid];
+  const interactive = (
+    <Entity
+      onPointerEnter={(event) => {
+        const x: number = event.pointX;
+        void x;
+      }}
+      onClick={(event) => event.stopPropagation()}
+      onPress={() => {}}
+    />
+  );
+  // @ts-expect-error Entity handlers must be functions
+  const invalidHandler = <Entity onClick="click" />;
+  // @ts-expect-error bound data components do not accept Entity pointer handlers
+  const invalidBoundHandler = <Cuboid width={1} height={1} depth={1} onClick={() => {}} />;
+  return [valid, invalid, interactive, invalidHandler, invalidBoundHandler];
 }
 
 void typeContracts;

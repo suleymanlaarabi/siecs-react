@@ -34,6 +34,8 @@ import {
 import { TEXT_NODE_ERROR } from "./constants.js";
 import {
   getCurrentUpdatePriority,
+  resolveEventTimeStamp,
+  resolveEventType,
   resolveUpdatePriority,
   setCurrentUpdatePriority,
 } from "./priorities.js";
@@ -159,8 +161,8 @@ export const hostConfig = {
   requestPostPaintCallback(callback: (time: number) => void): void {
     setTimeout(() => callback(performance.now()), 0);
   },
-  resolveEventType: () => null,
-  resolveEventTimeStamp: () => -1,
+  resolveEventType,
+  resolveEventTimeStamp,
   trackSchedulerEvent: () => {},
   shouldAttemptEagerTransition: () => false,
 
